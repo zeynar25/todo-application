@@ -88,6 +88,8 @@ public class TaskControllerTests {
 				MockMvcRequestBuilders.get("/tasks")
 				.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(
+				MockMvcResultMatchers.status().isOk()
+		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[0].id").value(savedTaskA.getId())
 		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[1].id").value(savedTaskB.getId())
@@ -192,6 +194,8 @@ public class TaskControllerTests {
 				MockMvcRequestBuilders.get("/tasks/done")
 					.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(
+				MockMvcResultMatchers.status().isOk()
+		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[0].id").value(savedTaskB.getId())
 		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[1].id").value(savedTaskC.getId())
@@ -217,6 +221,8 @@ public class TaskControllerTests {
 		mockMvc.perform(
 				MockMvcRequestBuilders.get("/tasks/todo")
 					.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(
+				MockMvcResultMatchers.status().isOk()
 		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[0].id").value(savedTaskB.getId())
 		).andExpect(
@@ -244,6 +250,8 @@ public class TaskControllerTests {
 		mockMvc.perform(
 				MockMvcRequestBuilders.get("/tasks/in-progress")
 					.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(
+				MockMvcResultMatchers.status().isOk()
 		).andExpect(
 				MockMvcResultMatchers.jsonPath("$[0].id").value(savedTaskB.getId())
 		).andExpect(

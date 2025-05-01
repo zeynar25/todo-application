@@ -38,7 +38,7 @@ public class TaskController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<TaskDto> listTasks(@PathVariable("id") Long id) {
+	public ResponseEntity<TaskDto> listTask(@PathVariable("id") Long id) {
 		Optional<Task> foundTask = taskService.read(id);
 		
 		return foundTask.map(task -> {
@@ -47,38 +47,42 @@ public class TaskController {
 	}
 	
 	@GetMapping
-	public List<TaskDto> listTasks() {
+	public ResponseEntity<List<TaskDto>> listTasks() {
 		List<Task> tasks = taskService.readAll();
-		return tasks.stream()
+		return new ResponseEntity<>(tasks.stream()
 				.map(taskMapper::mapTo)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()), 
+			HttpStatus.OK);
 	}
 	
 	@GetMapping("/done")
-	public List<TaskDto> listDoneTasks() {
+	public ResponseEntity<List<TaskDto>> listDoneTasks() {
 		List<Task> doneTasks = taskService.readByStatus("Done");
 		
-		return doneTasks.stream()
+		return new ResponseEntity<>(doneTasks.stream()
 				.map(taskMapper::mapTo)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()), 
+			HttpStatus.OK);
 	}
 	
 	@GetMapping("/todo")
-	public List<TaskDto> listTodoTasks() {
+	public ResponseEntity<List<TaskDto>> listTodoTasks() {
 		List<Task> doneTasks = taskService.readByStatus("Todo");
 		
-		return doneTasks.stream()
+		return new ResponseEntity<>(doneTasks.stream()
 				.map(taskMapper::mapTo)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()), 
+			HttpStatus.OK);
 	}
 	
 	@GetMapping("/in-progress")
-	public List<TaskDto> listInProgressTasks() {
+	public ResponseEntity<List<TaskDto>> listInProgressTasks() {
 		List<Task> doneTasks = taskService.readByStatus("In-Progress");
 		
-		return doneTasks.stream()
+		return new ResponseEntity<>(doneTasks.stream()
 				.map(taskMapper::mapTo)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()), 
+			HttpStatus.OK);
 	}
 	
 	@PatchMapping("/{id}")
